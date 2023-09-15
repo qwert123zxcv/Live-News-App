@@ -48,8 +48,8 @@ function fillDataInCard(cardClone, article){
 
 let curSelectedNav=null;
 
-function onNavItemClick(id){
-    fetchNews(id);
+function onNavItemClick(id, topic){
+    fetchNews(topic);
     const navItem=document.getElementById(id);
     curSelectedNav?.classList.remove('active');
     curSelectedNav=navItem;
@@ -61,6 +61,17 @@ const searchText=document.getElementById('search-text');
 
 searchButton.addEventListener("click", () => {
     const query=searchText.value;
+    if(!query) return;
+    fetchNews(query);
+    curSelectedNav?.classList.remove('active');
+    curSelectedNav=null;
+})
+
+const navSearchButton=document.getElementById('nav-search-button');
+const navSearchText=document.getElementById('nav-search-text');
+
+navSearchButton.addEventListener("click", () => {
+    const query=navSearchText.value;
     if(!query) return;
     fetchNews(query);
     curSelectedNav?.classList.remove('active');
